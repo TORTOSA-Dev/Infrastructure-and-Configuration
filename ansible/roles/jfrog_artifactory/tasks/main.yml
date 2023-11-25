@@ -1,0 +1,17 @@
+# roles/jfrog_artifactory7/tasks/main.yml
+---
+- name: Add JFrog Artifactory 7 repository
+  become: true
+  ansible.builtin.shell: 
+    cmd: "echo 'deb https://releases.jfrog.io/artifactory/artifactory-pro-debs xenial main' | sudo tee -a /etc/apt/sources.list; wget -qO - https://releases.jfrog.io/artifactory/api/gpg/key/public | sudo apt-key add -; echo 'deb https://releases.jfrog.io/artifactory/artifactory-pro-debs {{ ansible_distribution_release|lower }} main' | sudo tee -a /etc/apt/sources.list;"
+
+- name: Update apt cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install JFrog Artifactory 7
+  become: true
+  ansible.builtin.apt:
+    name: jfrog-artifactory-pro
+    state: present

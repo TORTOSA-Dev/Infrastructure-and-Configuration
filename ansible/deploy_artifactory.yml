@@ -1,0 +1,7 @@
+# deploy_artifactory.yml
+---
+- name: Deploy JFrog Artifactory
+  hosts: localhost
+  become: true
+  roles:
+    - jfrog_artifactory
