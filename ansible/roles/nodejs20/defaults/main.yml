@@ -1,0 +1,4 @@
+# ansible_roles/nodejs20/defaults/main.yml
+
+---
+nodejs_version: 20

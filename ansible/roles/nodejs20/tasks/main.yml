@@ -1,0 +1,46 @@
+# ansible_roles/nodejs20/tasks/main.yml
+
+---
+- name: Install required packages
+  become: yes
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+    state: present
+    update_cache: yes
+
+- name: Create keyrings directory
+  become: yes
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+
+- name: Download and install Node.js GPG key
+  become: yes
+  shell: "curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg"
+
+- name: Add Node.js repository
+  become: yes
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main"
+    state: present
+
+- name: Update APT cache
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install Node.js 20
+  become: yes
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes
+
+- name: Install npm
+  become: yes
+  apt:
+    name: npm
+    state: present

@@ -1,0 +1,7 @@
+# nodejs20.yml
+
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - role: roles/nodejs20
