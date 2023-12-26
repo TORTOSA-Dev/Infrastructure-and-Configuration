@@ -1,0 +1,7 @@
+# deploy_docker.yml
+---
+- name: Deploy docker
+  hosts: localhost
+  become: true
+  roles:
+    - jfrog_artifactory

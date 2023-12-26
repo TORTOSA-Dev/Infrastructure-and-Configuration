@@ -1,6 +1,6 @@
 ---
 - name: Deploy Grafana
-  hosts: localhost
+  hosts: rsp
   become: true
   roles:
     - grafana
